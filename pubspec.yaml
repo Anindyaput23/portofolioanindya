@@ -1,0 +1,49 @@
+name: portofolio
+
+description: "Portfolio website Anindya Putri Nariswari."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  firebase_core: ^4.0.0
+  firebase_auth: ^6.5.7
+  cloud_firestore: ^6.8.0
+
+  google_fonts: ^8.2.1
+  flutter_svg: ^2.2.0
+  url_launcher: ^6.3.2
+
+  file_picker: ^12.0.0
+  image_picker: ^1.2.0
+  http: ^1.5.0
+
+  model_viewer_plus: ^1.10.0
+  audioplayers: ^6.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+# ============================================================
+# COMPATIBILITY FIX
+# ============================================================
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/audio/
+    - assets/CV_Anindya_Putri_Nariswari.docx.pdf

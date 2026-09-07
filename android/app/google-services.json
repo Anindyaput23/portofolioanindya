@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "735043463564",
+    "project_id": "anindyapotofolio",
+    "storage_bucket": "anindyapotofolio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735043463564:android:81b3c3c96c5ef12c2d0ea9",
+        "android_client_info": {
+          "package_name": "com.example.portofolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7Faz5H11K3GE4ABm2Yr9GWcyBV0O2csI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
