@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../pages/cv_viewer_page.dart';
 
 // ============================================================
 // COLORS
@@ -563,7 +564,7 @@ class _AboutSectionState extends State<AboutSection>
             ),
 
             // ==================================================
-            // DOWNLOAD CV
+            // VIEW CV
             // ==================================================
 
             FadeTransition(
@@ -571,7 +572,7 @@ class _AboutSectionState extends State<AboutSection>
               child: SlideTransition(
                 position: _buttonSlide,
                 child:
-                    const _DownloadCvButton(),
+                    const _ViewCvButton(),
               ),
             ),
           ],
@@ -1177,47 +1178,29 @@ class _InteractivePhotoState
 }
 
 // ============================================================
-// DOWNLOAD CV BUTTON
+// VIEW CV BUTTON
 // ============================================================
 
-class _DownloadCvButton
+class _ViewCvButton
     extends StatefulWidget {
-  const _DownloadCvButton();
+  const _ViewCvButton();
 
   @override
-  State<_DownloadCvButton> createState() =>
-      _DownloadCvButtonState();
+  State<_ViewCvButton> createState() =>
+      _ViewCvButtonState();
 }
 
-class _DownloadCvButtonState
-    extends State<_DownloadCvButton> {
+class _ViewCvButtonState
+    extends State<_ViewCvButton> {
   bool hovering = false;
 
-  Future<void> _openCv() async {
-    final Uri uri = Uri.parse(
-      'assets/CV_Anindya_Putri_Nariswari.docx.pdf',
+  void _openCvViewer() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            const CvViewerPage(),
+      ),
     );
-
-    try {
-      await launchUrl(
-        uri,
-        webOnlyWindowName: '_blank',
-      );
-    } catch (_) {
-      if (!mounted) {
-        return;
-      }
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'CV tidak dapat dibuka.',
-          ),
-        ),
-      );
-    }
   }
 
   @override
@@ -1238,7 +1221,7 @@ class _DownloadCvButtonState
         });
       },
       child: GestureDetector(
-        onTap: _openCv,
+        onTap: _openCvViewer,
         child: AnimatedContainer(
           duration:
               const Duration(
@@ -1282,7 +1265,7 @@ class _DownloadCvButtonState
                 MainAxisSize.min,
             children: [
               Icon(
-                Icons.download_rounded,
+                Icons.description_outlined,
                 color: hovering
                     ? kAboutBackground
                     : kAboutPink,
@@ -1294,7 +1277,7 @@ class _DownloadCvButtonState
               ),
 
               Text(
-                'UNDUH CV',
+                'LIHAT CV',
                 style:
                     GoogleFonts.spaceMono(
                   color: hovering
@@ -1312,7 +1295,7 @@ class _DownloadCvButtonState
               ),
 
               Icon(
-                Icons.arrow_outward_rounded,
+                Icons.arrow_forward_rounded,
                 color: hovering
                     ? kAboutBackground
                     : kAboutPink,
