@@ -1,8 +1,8 @@
-import 'dart:html' as html;
 import 'dart:ui_web' as ui_web;
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web/web.dart' as web;
 
 class CvViewerPage extends StatefulWidget {
   const CvViewerPage({
@@ -29,7 +29,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
   // ==========================================================
 
   static const String cvPath =
-    '/assets/CV_Anindya%20Putri%20Nariswari.docx.pdf';
+      'assets/assets/CV_Anindya_Putri_Nariswari.docx.pdf';
 
   static const String viewerType = 'cv-pdf-viewer';
 
@@ -44,12 +44,14 @@ class _CvViewerPageState extends State<CvViewerPage> {
     ui_web.platformViewRegistry.registerViewFactory(
       viewerType,
       (int viewId) {
-        final iframe = html.IFrameElement()
-          ..src = cvPath
-          ..style.border = 'none'
-          ..style.width = '100%'
-          ..style.height = '100%'
-          ..style.backgroundColor = '#050509';
+        final iframe = web.HTMLIFrameElement();
+
+        iframe.src = cvPath;
+
+        iframe.style.border = 'none';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.backgroundColor = '#050509';
 
         return iframe;
       },
@@ -61,16 +63,13 @@ class _CvViewerPageState extends State<CvViewerPage> {
   // ==========================================================
 
   void _downloadCv() {
-    final anchor = html.AnchorElement(
-      href: cvPath,
-    )
-      ..setAttribute(
-        'download',
-        'CV_Anindya_Putri_Nariswari.pdf',
-      )
-      ..target = '_blank';
+    final anchor = web.HTMLAnchorElement();
 
-    html.document.body?.children.add(anchor);
+    anchor.href = cvPath;
+    anchor.download = 'CV_Anindya_Putri_Nariswari.pdf';
+    anchor.target = '_blank';
+
+    web.document.body?.append(anchor);
 
     anchor.click();
 
@@ -107,10 +106,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
               ),
               child: Row(
                 children: [
-                  // ==================================================
-                  // BACK BUTTON
-                  // ==================================================
-
+                  // BACK
                   IconButton(
                     tooltip: 'Kembali',
                     onPressed: () {
@@ -126,10 +122,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
                     width: 10,
                   ),
 
-                  // ==================================================
                   // TITLE
-                  // ==================================================
-
                   Expanded(
                     child: Text(
                       'CURRICULUM VITAE',
@@ -142,10 +135,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
                     ),
                   ),
 
-                  // ==================================================
-                  // DOWNLOAD BUTTON
-                  // ==================================================
-
+                  // DOWNLOAD
                   MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -159,8 +149,9 @@ class _CvViewerPageState extends State<CvViewerPage> {
                           color: pink.withValues(
                             alpha: 0.10,
                           ),
-                          borderRadius:
-                              BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(
+                            100,
+                          ),
                           border: Border.all(
                             color: pink,
                             width: 1,
@@ -174,11 +165,9 @@ class _CvViewerPageState extends State<CvViewerPage> {
                               color: pink,
                               size: 16,
                             ),
-
                             const SizedBox(
                               width: 8,
                             ),
-
                             Text(
                               'UNDUH CV',
                               style: GoogleFonts.spaceMono(
@@ -216,7 +205,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
             ),
 
             // ==================================================
-            // BOTTOM INFO
+            // FOOTER
             // ==================================================
 
             Container(
