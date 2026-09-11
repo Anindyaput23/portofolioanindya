@@ -29,7 +29,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
   // ==========================================================
 
   static const String cvPath =
-      'assets/CV_Anindya Putri Nariswari.docx.pdf';
+    '/assets/CV_Anindya%20Putri%20Nariswari.docx.pdf';
 
   static const String viewerType = 'cv-pdf-viewer';
 
