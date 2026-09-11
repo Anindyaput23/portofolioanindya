@@ -14,28 +14,16 @@ class CvViewerPage extends StatefulWidget {
 }
 
 class _CvViewerPageState extends State<CvViewerPage> {
-  // ==========================================================
-  // COLORS
-  // ==========================================================
-
   static const Color background = Color(0xFF09080F);
   static const Color surface = Color(0xFF15111D);
   static const Color pink = Color(0xFFFF4FA3);
   static const Color white = Color(0xFFF7F2FF);
   static const Color muted = Color(0xAAAFA7BA);
 
-  // ==========================================================
-  // CV FILE
-  // ==========================================================
-
   static const String cvPath =
       'assets/assets/CV_Anindya_Putri_Nariswari.docx.pdf';
 
   static const String viewerType = 'cv-pdf-viewer';
-
-  // ==========================================================
-  // REGISTER PDF VIEWER
-  // ==========================================================
 
   @override
   void initState() {
@@ -46,7 +34,10 @@ class _CvViewerPageState extends State<CvViewerPage> {
       (int viewId) {
         final iframe = web.HTMLIFrameElement();
 
-        iframe.src = cvPath;
+        final pdfUrl =
+            '${web.window.location.origin}/$cvPath#toolbar=1&navpanes=0&scrollbar=1';
+
+        iframe.src = pdfUrl;
 
         iframe.style.border = 'none';
         iframe.style.width = '100%';
@@ -58,10 +49,6 @@ class _CvViewerPageState extends State<CvViewerPage> {
     );
   }
 
-  // ==========================================================
-  // DOWNLOAD CV
-  // ==========================================================
-
   void _downloadCv() {
     final anchor = web.HTMLAnchorElement();
 
@@ -70,15 +57,9 @@ class _CvViewerPageState extends State<CvViewerPage> {
     anchor.target = '_blank';
 
     web.document.body?.append(anchor);
-
     anchor.click();
-
     anchor.remove();
   }
-
-  // ==========================================================
-  // BUILD
-  // ==========================================================
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +68,6 @@ class _CvViewerPageState extends State<CvViewerPage> {
       body: SafeArea(
         child: Column(
           children: [
-            // ==================================================
-            // TOP BAR
-            // ==================================================
-
             Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,
@@ -106,7 +83,6 @@ class _CvViewerPageState extends State<CvViewerPage> {
               ),
               child: Row(
                 children: [
-                  // BACK
                   IconButton(
                     tooltip: 'Kembali',
                     onPressed: () {
@@ -117,12 +93,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
                       color: white,
                     ),
                   ),
-
-                  const SizedBox(
-                    width: 10,
-                  ),
-
-                  // TITLE
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       'CURRICULUM VITAE',
@@ -134,8 +105,6 @@ class _CvViewerPageState extends State<CvViewerPage> {
                       ),
                     ),
                   ),
-
-                  // DOWNLOAD
                   MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -146,12 +115,8 @@ class _CvViewerPageState extends State<CvViewerPage> {
                           vertical: 11,
                         ),
                         decoration: BoxDecoration(
-                          color: pink.withValues(
-                            alpha: 0.10,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            100,
-                          ),
+                          color: pink.withValues(alpha: 0.10),
+                          borderRadius: BorderRadius.circular(100),
                           border: Border.all(
                             color: pink,
                             width: 1,
@@ -165,9 +130,7 @@ class _CvViewerPageState extends State<CvViewerPage> {
                               color: pink,
                               size: 16,
                             ),
-                            const SizedBox(
-                              width: 8,
-                            ),
+                            const SizedBox(width: 8),
                             Text(
                               'UNDUH CV',
                               style: GoogleFonts.spaceMono(
@@ -186,10 +149,6 @@ class _CvViewerPageState extends State<CvViewerPage> {
               ),
             ),
 
-            // ==================================================
-            // PDF VIEWER
-            // ==================================================
-
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -203,10 +162,6 @@ class _CvViewerPageState extends State<CvViewerPage> {
                 ),
               ),
             ),
-
-            // ==================================================
-            // FOOTER
-            // ==================================================
 
             Container(
               width: double.infinity,
