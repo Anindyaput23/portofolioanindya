@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // ============================================================
 // COLORS
@@ -41,9 +40,6 @@ class _AboutSectionState extends State<AboutSection>
 
   late final Animation<double> _contentOpacity;
   late final Animation<Offset> _contentSlide;
-
-  late final Animation<double> _buttonOpacity;
-  late final Animation<Offset> _buttonSlide;
 
   @override
   void initState() {
@@ -116,35 +112,6 @@ class _AboutSectionState extends State<AboutSection>
       ),
     );
 
-    // ========================================================
-    // BUTTON ANIMATION
-    // ========================================================
-
-    _buttonOpacity = CurvedAnimation(
-      parent: _entranceController,
-      curve: const Interval(
-        0.50,
-        1.0,
-        curve: Curves.easeOut,
-      ),
-    );
-
-    _buttonSlide = Tween<Offset>(
-      begin: const Offset(
-        0,
-        0.15,
-      ),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _entranceController,
-        curve: const Interval(
-          0.50,
-          1.0,
-          curve: Curves.easeOutBack,
-        ),
-      ),
-    );
 
     Future<void>.delayed(
       const Duration(
@@ -558,22 +525,6 @@ class _AboutSectionState extends State<AboutSection>
               ],
             ),
 
-            const SizedBox(
-              height: 30,
-            ),
-
-            // ==================================================
-            // DOWNLOAD CV
-            // ==================================================
-
-            FadeTransition(
-              opacity: _buttonOpacity,
-              child: SlideTransition(
-                position: _buttonSlide,
-                child:
-                    const _DownloadCvButton(),
-              ),
-            ),
           ],
         ),
       ),
@@ -1171,156 +1122,6 @@ class _InteractivePhotoState
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-// ============================================================
-// DOWNLOAD CV BUTTON
-// ============================================================
-
-class _DownloadCvButton
-    extends StatefulWidget {
-  const _DownloadCvButton();
-
-  @override
-  State<_DownloadCvButton> createState() =>
-      _DownloadCvButtonState();
-}
-
-class _DownloadCvButtonState
-    extends State<_DownloadCvButton> {
-  bool hovering = false;
-
-  Future<void> _openCv() async {
-    final Uri uri = Uri.parse(
-      'assets/CV_Anindya_Putri_Nariswari.docx.pdf',
-    );
-
-    try {
-      await launchUrl(
-        uri,
-        webOnlyWindowName: '_blank',
-      );
-    } catch (_) {
-      if (!mounted) {
-        return;
-      }
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'CV tidak dapat dibuka.',
-          ),
-        ),
-      );
-    }
-  }
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return MouseRegion(
-      cursor:
-          SystemMouseCursors.click,
-      onEnter: (_) {
-        setState(() {
-          hovering = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          hovering = false;
-        });
-      },
-      child: GestureDetector(
-        onTap: _openCv,
-        child: AnimatedContainer(
-          duration:
-              const Duration(
-            milliseconds: 180,
-          ),
-          curve: Curves.easeOut,
-          padding:
-              const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 13,
-          ),
-          decoration:
-              BoxDecoration(
-            color: hovering
-                ? kAboutPink
-                : kAboutPink.withValues(
-                    alpha: 0.10,
-                  ),
-            borderRadius:
-                BorderRadius.circular(
-              100,
-            ),
-            border: Border.all(
-              color: kAboutPink,
-              width: 1,
-            ),
-            boxShadow: hovering
-                ? [
-                    BoxShadow(
-                      color:
-                          kAboutPink.withValues(
-                        alpha: 0.28,
-                      ),
-                      blurRadius: 22,
-                    ),
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisSize:
-                MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.download_rounded,
-                color: hovering
-                    ? kAboutBackground
-                    : kAboutPink,
-                size: 17,
-              ),
-
-              const SizedBox(
-                width: 9,
-              ),
-
-              Text(
-                'UNDUH CV',
-                style:
-                    GoogleFonts.spaceMono(
-                  color: hovering
-                      ? kAboutBackground
-                      : kAboutWhite,
-                  fontSize: 9,
-                  fontWeight:
-                      FontWeight.w700,
-                  letterSpacing: 1.2,
-                ),
-              ),
-
-              const SizedBox(
-                width: 8,
-              ),
-
-              Icon(
-                Icons.arrow_outward_rounded,
-                color: hovering
-                    ? kAboutBackground
-                    : kAboutPink,
-                size: 14,
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
