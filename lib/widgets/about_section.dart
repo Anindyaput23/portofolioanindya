@@ -401,8 +401,8 @@ class _AboutSectionState extends State<AboutSection>
                 ),
 
                 Text(
-                  'ABOUT ME',
-                  style:
+                  'ABOUT ME TEST',
+                  style: 
                       GoogleFonts.spaceMono(
                     color:
                         kAboutPinkSoft,
