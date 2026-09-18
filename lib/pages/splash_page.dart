@@ -329,10 +329,8 @@ class _SplashPageState
                         return Container(
                           color:
                               background
-                                  .withOpacity(
-                            value *
-                                0.10,
-                          ),
+                                  .withValues(alpha: value *
+                                0.10,),
                         );
                       },
                     ),
@@ -558,9 +556,7 @@ class _SplashPageState
                 GoogleFonts
                     .spaceMono(
               color:
-                  white.withOpacity(
-                0.80,
-              ),
+                  white.withValues(alpha: 0.80,),
 
               fontSize:
                   mobile
@@ -852,16 +848,12 @@ class _CodeOrb
                   BoxShape.circle,
 
               color:
-                  purple.withOpacity(
-                .06,
-              ),
+                  purple.withValues(alpha: .06,),
 
               boxShadow: [
                 BoxShadow(
                   color:
-                      pink.withOpacity(
-                    .17,
-                  ),
+                      pink.withValues(alpha: .17,),
 
                   blurRadius:
                       35,
@@ -889,9 +881,7 @@ class _CodeOrb
               border:
                   Border.all(
                 color:
-                    white.withOpacity(
-                  .17,
-                ),
+                    white.withValues(alpha: .17,),
 
                 width:
                     1,
@@ -925,9 +915,7 @@ class _CodeOrb
                 border:
                     Border.all(
                   color:
-                      purple.withOpacity(
-                    .27,
-                  ),
+                      purple.withValues(alpha: .27,),
 
                   width:
                       1,
@@ -982,9 +970,7 @@ class _CodeOrb
               boxShadow: [
                 BoxShadow(
                   color:
-                      pink.withOpacity(
-                    .27,
-                  ),
+                      pink.withValues(alpha: .27,),
 
                   blurRadius:
                       30,
@@ -1025,9 +1011,7 @@ class _CodeOrb
                   border:
                       Border.all(
                     color:
-                        white.withOpacity(
-                      .08,
-                    ),
+                        white.withValues(alpha: .08,),
 
                     width:
                         1,
@@ -1037,9 +1021,7 @@ class _CodeOrb
                     BoxShadow(
                       color:
                           Colors.black
-                              .withOpacity(
-                        .30,
-                      ),
+                              .withValues(alpha: .30,),
 
                       blurRadius:
                           18,
@@ -1201,9 +1183,7 @@ class _CodeSymbol
               boxShadow: [
                 BoxShadow(
                   color:
-                      lime.withOpacity(
-                    .45,
-                  ),
+                      lime.withValues(alpha: .45,),
 
                   blurRadius:
                       7,
@@ -1235,9 +1215,7 @@ class _CodeSymbol
               shadows: [
                 Shadow(
                   color:
-                      pink.withOpacity(
-                    .65,
-                  ),
+                      pink.withValues(alpha: .65,),
 
                   blurRadius:
                       10,
@@ -1275,9 +1253,7 @@ class _CodeSymbol
             decoration:
                 BoxDecoration(
               color:
-                  blue.withOpacity(
-                .75,
-              ),
+                  blue.withValues(alpha: .75,),
 
               borderRadius:
                   BorderRadius.circular(
@@ -1327,9 +1303,7 @@ class _OrbDot
         boxShadow: [
           BoxShadow(
             color:
-                color.withOpacity(
-              .60,
-            ),
+                color.withValues(alpha: .60,),
 
             blurRadius:
                 10,
@@ -1373,9 +1347,7 @@ class _SpaceBackgroundPainter
           ..color =
               const Color(
             0xFFFFFFFF,
-          ).withOpacity(
-            .032,
-          );
+          ).withValues(alpha: .032,);
 
     const double spacing =
         48;
@@ -1499,11 +1471,9 @@ class _SpaceBackgroundPainter
       paint.color =
           const Color(
         0xFFFFFFFF,
-      ).withOpacity(
-        i.isEven
+      ).withValues(alpha: i.isEven
             ? .14
-            : .08,
-      );
+            : .08,);
 
       canvas.drawCircle(
         stars[i],
@@ -1523,9 +1493,7 @@ class _SpaceBackgroundPainter
     paint.color =
         const Color(
       0xFFFF4FA3,
-    ).withOpacity(
-      .045,
-    );
+    ).withValues(alpha: .045,);
 
     canvas.drawCircle(
       Offset(
@@ -1545,9 +1513,7 @@ class _SpaceBackgroundPainter
     paint.color =
         const Color(
       0xFF7C5CFF,
-    ).withOpacity(
-      .045,
-    );
+    ).withValues(alpha: .045,);
 
     canvas.drawCircle(
       Offset(
@@ -1616,9 +1582,7 @@ class _OrbitPainter
           ..color =
               const Color(
             0xFFFF4FA3,
-          ).withOpacity(
-            .14,
-          );
+          ).withValues(alpha: .14,);
 
     canvas.save();
 
@@ -1682,9 +1646,7 @@ class _OrbitPainter
           ..color =
               const Color(
             0xFFA8FF3E,
-          ).withOpacity(
-            .75,
-          );
+          ).withValues(alpha: .75,);
 
     canvas.drawCircle(
       dot,

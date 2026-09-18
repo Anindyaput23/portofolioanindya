@@ -642,7 +642,7 @@ class _InteractivePhotoState
   late final AnimationController
       _swapController;
 
-  bool _isSpiderMan = false;
+  bool _isGayaBebas = false;
   bool _hovering = false;
 
   double _rotationX = 0;
@@ -676,7 +676,7 @@ class _InteractivePhotoState
   ) {
     setState(() {
       _hovering = true;
-      _isSpiderMan = true;
+      _isGayaBebas = true;
     });
 
     _swapController.forward();
@@ -743,7 +743,7 @@ class _InteractivePhotoState
   ) {
     setState(() {
       _hovering = false;
-      _isSpiderMan = false;
+      _isGayaBebas = false;
       _rotationX = 0;
       _rotationY = 0;
     });
@@ -756,15 +756,15 @@ class _InteractivePhotoState
   // ==========================================================
 
   void _onMobileTap() {
-    if (_isSpiderMan) {
+    if (_isGayaBebas) {
       setState(() {
-        _isSpiderMan = false;
+        _isGayaBebas = false;
       });
 
       _swapController.reverse();
     } else {
       setState(() {
-        _isSpiderMan = true;
+        _isGayaBebas = true;
       });
 
       _swapController.forward();
@@ -903,7 +903,7 @@ class _InteractivePhotoState
                         curve:
                             Curves.easeInOut,
                         opacity:
-                            _isSpiderMan
+                            _isGayaBebas
                                 ? 0.0
                                 : 1.0,
                         child:
@@ -936,7 +936,7 @@ class _InteractivePhotoState
                       ),
 
                       // ==================================================
-                      // FOTO SPIDER-MAN
+                      // FOTO GAYA BEBAS
                       // ==================================================
 
                       AnimatedOpacity(
@@ -947,12 +947,12 @@ class _InteractivePhotoState
                         curve:
                             Curves.easeInOut,
                         opacity:
-                            _isSpiderMan
+                            _isGayaBebas
                                 ? 1.0
                                 : 0.0,
                         child:
                             Image.asset(
-                          'assets/images/spiderman.jpeg',
+                          'assets/images/gayabebas.jpeg',
                           fit: BoxFit.cover,
                           alignment:
                               Alignment.center,
@@ -982,7 +982,7 @@ class _InteractivePhotoState
                                     height: 10,
                                   ),
                                   Text(
-                                    'SPIDER-MAN',
+                                    'GAYA BEBAS',
                                     style:
                                         GoogleFonts
                                             .spaceMono(
@@ -1031,7 +1031,7 @@ class _InteractivePhotoState
                                   Colors.black
                                       .withValues(
                                     alpha:
-                                        _isSpiderMan
+                                        _isGayaBebas
                                             ? 0.10
                                             : 0.04,
                                   ),
@@ -1096,7 +1096,7 @@ class _InteractivePhotoState
                             ),
 
                             Text(
-                              _isSpiderMan
+                              _isGayaBebas
                                   ? 'IDENTITY SWAPPED'
                                   : 'ABOUT ME',
                               style:
