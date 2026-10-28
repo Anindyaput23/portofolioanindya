@@ -165,7 +165,7 @@ class _AboutSectionState extends State<AboutSection>
                 ? data!['aboutDescription']
                     .toString()
                     .trim()
-                : 'Lulusan D3 Teknologi Informasi yang memiliki ketertarikan pada software engineering dan pengembangan aplikasi. Senang mengubah ide menjadi solusi digital yang fungsional, efisien, dan terus berkembang.';
+                : 'Fresh Graduate Jurusan D3 Teknologi Informasi yang memiliki ketertarikan pada pengembangan aplikasi. Senang mengubah ide menjadi solusi digital yang fungsional, efisien, dan terus berkembang.';
 
         final String location =
             data?['location']
@@ -467,7 +467,7 @@ class _AboutSectionState extends State<AboutSection>
             ),
 
             Text(
-              'Software Engineer · Teknologi Informasi',
+              'Programmer · Teknologi Informasi',
               style:
                   GoogleFonts.dmSans(
                 color: kAboutMuted,

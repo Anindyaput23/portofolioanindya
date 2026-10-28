@@ -62,7 +62,7 @@ class _HeroSectionState extends State<HeroSection>
   // ==========================================================
 
   static const String _typingText =
-      'SOFTWARE ENGINEER';
+      'PROGRAMMER';
 
   String _typedTitle = '';
   int _typingIndex = 0;
@@ -250,7 +250,7 @@ class _HeroSectionState extends State<HeroSection>
     );
 
     // ========================================================
-    // SOFTWARE ENGINEER
+    // PROGRAMMER
     // ========================================================
 
     _titleOpacity = CurvedAnimation(
@@ -528,7 +528,7 @@ class _HeroSectionState extends State<HeroSection>
         // ======================================================
 
         const String title =
-            'SOFTWARE ENGINEER';
+            'PROGRAMMER';
 
         final String description =
             data?['description']
@@ -832,7 +832,7 @@ class _HeroSectionState extends State<HeroSection>
         ),
 
         // ======================================================
-        // SOFTWARE ENGINEER
+        // PROGRAMMER
         // TYPEWRITER + PINK SHIMMER
         // ======================================================
 
