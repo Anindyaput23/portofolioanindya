@@ -11,6 +11,7 @@ import '../widgets/contact_section.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/navbar.dart';
 import '../widgets/space_background.dart';
+import '../widgets/training_content.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({
@@ -28,6 +29,8 @@ class _PortfolioPageState extends State<PortfolioPage> {
   final GlobalKey homeKey = GlobalKey();
   final GlobalKey aboutKey = GlobalKey();
   final GlobalKey showcaseKey = GlobalKey();
+  final GlobalKey<_PortfolioShowcaseState> showcaseWidgetKey =
+      GlobalKey<_PortfolioShowcaseState>();
   final GlobalKey contactKey = GlobalKey();
 
   @override
@@ -39,6 +42,11 @@ class _PortfolioPageState extends State<PortfolioPage> {
   // ==========================================================================
   // SCROLL
   // ==========================================================================
+
+  void _openShowcaseTab(int tab) {
+    showcaseWidgetKey.currentState?.selectTab(tab);
+    _scrollTo(showcaseKey);
+  }
 
   void _scrollTo(GlobalKey key) {
     final BuildContext? targetContext =
@@ -148,7 +156,9 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         ),
 
                         child:
-                            const _PortfolioShowcase(),
+                            _PortfolioShowcase(
+                              key: showcaseWidgetKey,
+                            ),
                       ),
                     ),
 
@@ -205,21 +215,19 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   },
 
                   onSkills: () {
-                    _scrollTo(
-                      showcaseKey,
-                    );
+                    _openShowcaseTab(3);
                   },
 
                   onProjects: () {
-                    _scrollTo(
-                      showcaseKey,
-                    );
+                    _openShowcaseTab(0);
                   },
 
                   onCertificates: () {
-                    _scrollTo(
-                      showcaseKey,
-                    );
+                    _openShowcaseTab(1);
+                  },
+
+                  onTraining: () {
+                    _openShowcaseTab(2);
                   },
 
                   onContact: () {
@@ -485,7 +493,9 @@ class _ScrollRevealState
 
 class _PortfolioShowcase
     extends StatefulWidget {
-  const _PortfolioShowcase();
+  const _PortfolioShowcase({
+    super.key,
+  });
 
   @override
   State<_PortfolioShowcase>
@@ -497,6 +507,14 @@ class _PortfolioShowcaseState
     extends State<
         _PortfolioShowcase> {
   int selectedTab = 0;
+
+  void selectTab(int index) {
+    if (index < 0 || index > 3) return;
+    if (selectedTab == index) return;
+    setState(() {
+      selectedTab = index;
+    });
+  }
 
   static const Color white =
       Color(0xFFF5F5F5);
@@ -700,6 +718,7 @@ class _PortfolioShowcaseState
     const List<String> labels = [
       'Proyek',
       'Sertifikat',
+      'Training & Courses',
       'Keahlian',
     ];
 
@@ -833,36 +852,29 @@ class _PortfolioShowcaseState
   Widget _buildContent(
     bool mobile,
   ) {
-    switch (
-        selectedTab) {
+    switch (selectedTab) {
       case 1:
         return _CertificatesContent(
-          key:
-              const ValueKey(
-            'sertifikat',
-          ),
-          mobile:
-              mobile,
+          key: const ValueKey('sertifikat'),
+          mobile: mobile,
         );
 
       case 2:
+         return TrainingContent(
+          key: const ValueKey('training'),
+          mobile: mobile,
+       );
+
+      case 3:
         return _SkillsContent(
-          key:
-              const ValueKey(
-            'keahlian',
-          ),
-          mobile:
-              mobile,
+          key: const ValueKey('keahlian'),
+          mobile: mobile,
         );
 
       default:
         return _ProjectsContent(
-          key:
-              const ValueKey(
-            'proyek',
-          ),
-          mobile:
-              mobile,
+          key: const ValueKey('proyek'),
+          mobile: mobile,
         );
     }
   }

@@ -21,12 +21,23 @@ class Navbar extends StatelessWidget {
     this.onContact,
   });
 
-  static const Color navBackground = Color(0xFF120F1D);
-  static const Color navSurface = Color(0xFF1C1730);
-  static const Color navWhite = Color(0xFFF5F0FF);
-  static const Color navMuted = Color(0xFFB4A9D6);
-  static const Color navPink = Color(0xFFFF3EA0);
-  static const Color navLime = Color(0xFFA8FF3E);
+  // ==========================================================
+  // COLORS
+  // ==========================================================
+
+  static const Color navBackground = Color(0xFF080B14);
+
+  static const Color navSurface = Color(0xFF101827);
+
+  static const Color navWhite = Color(0xFFF5F7FF);
+
+  static const Color navMuted = Color(0xFF9AA8C7);
+
+  static const Color navBlue = Color(0xFF3B82F6);
+
+  // ==========================================================
+  // BUILD
+  // ==========================================================
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +46,7 @@ class Navbar extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final bool isMobile = constraints.maxWidth < 850;
+
           return Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -64,66 +76,138 @@ class Navbar extends StatelessWidget {
     );
   }
 
+  // ==========================================================
+  // DESKTOP NAVBAR
+  // ==========================================================
+
   Widget _buildDesktopNavbar() {
     return Row(
       children: [
+        // ======================================================
+        // LOGO
+        // ======================================================
+
         GestureDetector(
           onTap: onHome,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('ANINDYA', style: GoogleFonts.unbounded(color: navWhite, fontSize: 15, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
-              const SizedBox(width: 3),
-              Text('.', style: GoogleFonts.unbounded(color: navLime, fontSize: 18, fontWeight: FontWeight.w900)),
-            ],
+          child: Text(
+            'ANINDYA',
+            style: GoogleFonts.unbounded(
+              color: navWhite,
+              fontSize: 15,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.5,
+            ),
           ),
         ),
+
         const Spacer(),
-        _navItem(label: 'HOME', onTap: onHome),
+
+        // ======================================================
+        // NAVIGATION
+        // ======================================================
+
+        _navItem(
+          label: 'HOME',
+          onTap: onHome,
+        ),
+
         const SizedBox(width: 28),
-        _navItem(label: 'ABOUT', onTap: onAbout),
+
+        _navItem(
+          label: 'ABOUT',
+          onTap: onAbout,
+        ),
+
         const SizedBox(width: 28),
-        _navItem(label: 'SKILLS', onTap: onSkills),
+
+        _navItem(
+          label: 'SKILLS',
+          onTap: onSkills,
+        ),
+
         const SizedBox(width: 28),
-        _navItem(label: 'PROJECTS', onTap: onProjects),
+
+        _navItem(
+          label: 'PROJECTS',
+          onTap: onProjects,
+        ),
+
         const SizedBox(width: 28),
-        _navItem(label: 'CERTIFICATES', onTap: onCertificates),
+
+        _navItem(
+          label: 'CERTIFICATES',
+          onTap: onCertificates,
+        ),
+
         const SizedBox(width: 28),
-        _navItem(label: 'TRAINING', onTap: onTraining),
+
+        _navItem(
+          label: 'TRAINING',
+          onTap: onTraining,
+        ),
+
         const SizedBox(width: 28),
-        _navItem(label: 'CONTACT', onTap: onContact),
+
+        _navItem(
+          label: 'CONTACT',
+          onTap: onContact,
+        ),
       ],
     );
   }
 
+  // ==========================================================
+  // MOBILE NAVBAR
+  // ==========================================================
+
   Widget _buildMobileNavbar(BuildContext context) {
     return Row(
       children: [
+        // ======================================================
+        // LOGO
+        // ======================================================
+
         GestureDetector(
           onTap: onHome,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('ANINDYA', style: GoogleFonts.unbounded(color: navWhite, fontSize: 13, fontWeight: FontWeight.w800, letterSpacing: -0.4)),
-              Text('.', style: GoogleFonts.unbounded(color: navLime, fontSize: 16, fontWeight: FontWeight.w900)),
-            ],
+          child: Text(
+            'ANINDYA',
+            style: GoogleFonts.unbounded(
+              color: navWhite,
+              fontSize: 13,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.4,
+            ),
           ),
         ),
+
         const Spacer(),
+
+        // ======================================================
+        // MENU BUTTON
+        // ======================================================
+
         Material(
           color: navSurface,
           borderRadius: BorderRadius.circular(100),
           child: InkWell(
             borderRadius: BorderRadius.circular(100),
-            onTap: () => _showMobileMenu(context),
+            onTap: () {
+              _showMobileMenu(context);
+            },
             child: Container(
               width: 44,
               height: 44,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: navWhite.withValues(alpha: 0.10)),
+                border: Border.all(
+                  color: navBlue.withValues(alpha: 0.35),
+                ),
               ),
-              child: const Icon(Icons.menu_rounded, color: navWhite, size: 22),
+              child: const Icon(
+                Icons.menu_rounded,
+                color: navWhite,
+                size: 22,
+              ),
             ),
           ),
         ),
@@ -131,12 +215,25 @@ class Navbar extends StatelessWidget {
     );
   }
 
-  Widget _navItem({required String label, required VoidCallback? onTap}) {
+  // ==========================================================
+  // NAV ITEM
+  // ==========================================================
+
+  Widget _navItem({
+    required String label,
+    required VoidCallback? onTap,
+  }) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(100),
+      hoverColor: navBlue.withValues(alpha: 0.08),
+      splashColor: navBlue.withValues(alpha: 0.12),
+      highlightColor: navBlue.withValues(alpha: 0.06),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 4,
+          vertical: 8,
+        ),
         child: Text(
           label,
           style: GoogleFonts.spaceGrotesk(
@@ -150,35 +247,80 @@ class Navbar extends StatelessWidget {
     );
   }
 
+  // ==========================================================
+  // MOBILE MENU
+  // ==========================================================
+
   void _showMobileMenu(BuildContext context) {
     showGeneralDialog(
       context: context,
-      barrierLabel: 'Mobile Menu',
+      barrierLabel: 'Menu Navigasi',
       barrierDismissible: true,
       barrierColor: navBackground.withValues(alpha: 0.88),
-      transitionDuration: const Duration(milliseconds: 280),
-      pageBuilder: (context, animation, secondaryAnimation) {
+      transitionDuration: const Duration(
+        milliseconds: 280,
+      ),
+      pageBuilder: (
+        context,
+        animation,
+        secondaryAnimation,
+      ) {
         return SafeArea(
           child: Material(
             color: navBackground,
             child: _MobileMenu(
-              onHome: () { Navigator.of(context).pop(); onHome?.call(); },
-              onAbout: () { Navigator.of(context).pop(); onAbout?.call(); },
-              onSkills: () { Navigator.of(context).pop(); onSkills?.call(); },
-              onProjects: () { Navigator.of(context).pop(); onProjects?.call(); },
-              onCertificates: () { Navigator.of(context).pop(); onCertificates?.call(); },
-              onTraining: () { Navigator.of(context).pop(); onTraining?.call(); },
-              onContact: () { Navigator.of(context).pop(); onContact?.call(); },
+              onHome: () {
+                Navigator.of(context).pop();
+                onHome?.call();
+              },
+              onAbout: () {
+                Navigator.of(context).pop();
+                onAbout?.call();
+              },
+              onSkills: () {
+                Navigator.of(context).pop();
+                onSkills?.call();
+              },
+              onProjects: () {
+                Navigator.of(context).pop();
+                onProjects?.call();
+              },
+              onCertificates: () {
+                Navigator.of(context).pop();
+                onCertificates?.call();
+              },
+              onTraining: () {
+                Navigator.of(context).pop();
+                onTraining?.call();
+              },
+              onContact: () {
+                Navigator.of(context).pop();
+                onContact?.call();
+              },
             ),
           ),
         );
       },
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
+      transitionBuilder: (
+        context,
+        animation,
+        secondaryAnimation,
+        child,
+      ) {
         return FadeTransition(
           opacity: animation,
           child: SlideTransition(
-            position: Tween<Offset>(begin: const Offset(0, -0.03), end: Offset.zero).animate(
-              CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+            position: Tween<Offset>(
+              begin: const Offset(
+                0,
+                -0.03,
+              ),
+              end: Offset.zero,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeOutCubic,
+              ),
             ),
             child: child,
           ),
@@ -187,6 +329,10 @@ class Navbar extends StatelessWidget {
     );
   }
 }
+
+// ============================================================
+// MOBILE MENU
+// ============================================================
 
 class _MobileMenu extends StatelessWidget {
   final VoidCallback? onHome;
@@ -207,25 +353,58 @@ class _MobileMenu extends StatelessWidget {
     this.onContact,
   });
 
-  static const Color menuSurface = Color(0xFF1C1730);
-  static const Color menuWhite = Color(0xFFF5F0FF);
-  static const Color menuMuted = Color(0xFFB4A9D6);
-  static const Color menuPink = Color(0xFFFF3EA0);
-  static const Color menuLime = Color(0xFFA8FF3E);
+  // ==========================================================
+  // COLORS
+  // ==========================================================
+
+  static const Color menuSurface = Color(0xFF101827);
+
+  static const Color menuWhite = Color(0xFFF5F7FF);
+
+  static const Color menuMuted = Color(0xFF9AA8C7);
+
+  static const Color menuBlue = Color(0xFF3B82F6);
+
+  // ==========================================================
+  // BUILD
+  // ==========================================================
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // ======================================================
+        // TOP BAR
+        // ======================================================
+
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
+          padding: const EdgeInsets.fromLTRB(
+            20,
+            16,
+            20,
+            10,
+          ),
           child: Row(
             children: [
-              Text('ANINDYA', style: GoogleFonts.unbounded(color: menuWhite, fontSize: 14, fontWeight: FontWeight.w800)),
-              Text('.', style: GoogleFonts.unbounded(color: menuLime, fontSize: 17, fontWeight: FontWeight.w900)),
+              Text(
+                'ANINDYA',
+                style: GoogleFonts.unbounded(
+                  color: menuWhite,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+
               const Spacer(),
+
+              // ==================================================
+              // CLOSE
+              // ==================================================
+
               InkWell(
-                onTap: () => Navigator.of(context).pop(),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
                 borderRadius: BorderRadius.circular(100),
                 child: Container(
                   width: 44,
@@ -233,63 +412,179 @@ class _MobileMenu extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: menuSurface,
-                    border: Border.all(color: menuWhite.withValues(alpha: 0.10)),
+                    border: Border.all(
+                      color: menuBlue.withValues(alpha: 0.35),
+                    ),
                   ),
-                  child: const Icon(Icons.close_rounded, color: menuWhite, size: 22),
+                  child: const Icon(
+                    Icons.close_rounded,
+                    color: menuWhite,
+                    size: 22,
+                  ),
                 ),
               ),
             ],
           ),
         ),
+
         const SizedBox(height: 20),
+
+        // ======================================================
+        // MENU CONTENT
+        // ======================================================
+
         Expanded(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _menuLabel('MENU'),
+
                 const SizedBox(height: 10),
-                _menuItem(number: '01', label: 'HOME', onTap: onHome),
-                _menuItem(number: '02', label: 'ABOUT', onTap: onAbout),
-                _menuItem(number: '03', label: 'SKILLS', onTap: onSkills),
-                _menuItem(number: '04', label: 'PROJECTS', onTap: onProjects),
-                _menuItem(number: '05', label: 'CERTIFICATES', onTap: onCertificates),
-                _menuItem(number: '06', label: 'TRAINING', onTap: onTraining),
-                _menuItem(number: '07', label: 'CONTACT', onTap: onContact),
+
+                _menuItem(
+                  number: '01',
+                  label: 'HOME',
+                  onTap: onHome,
+                ),
+
+                _menuItem(
+                  number: '02',
+                  label: 'ABOUT',
+                  onTap: onAbout,
+                ),
+
+                _menuItem(
+                  number: '03',
+                  label: 'SKILLS',
+                  onTap: onSkills,
+                ),
+
+                _menuItem(
+                  number: '04',
+                  label: 'PROJECTS',
+                  onTap: onProjects,
+                ),
+
+                _menuItem(
+                  number: '05',
+                  label: 'CERTIFICATES',
+                  onTap: onCertificates,
+                ),
+
+                _menuItem(
+                  number: '06',
+                  label: 'TRAINING',
+                  onTap: onTraining,
+                ),
+
+                _menuItem(
+                  number: '07',
+                  label: 'CONTACT',
+                  onTap: onContact,
+                ),
               ],
             ),
           ),
         ),
+
+        // ======================================================
+        // FOOTER
+        // ======================================================
+
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
-          child: Row(
-            children: [
-              Container(width: 7, height: 7, decoration: const BoxDecoration(color: menuLime, shape: BoxShape.circle)),
-              const SizedBox(width: 8),
-              Text('WEB & MOBILE DEVELOPER', style: GoogleFonts.spaceGrotesk(color: menuMuted, fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.2)),
-            ],
+          padding: const EdgeInsets.fromLTRB(
+            20,
+            15,
+            20,
+            20,
+          ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'PENGEMBANG WEB & MOBILE',
+              style: GoogleFonts.spaceGrotesk(
+                color: menuMuted,
+                fontSize: 9,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.2,
+              ),
+            ),
           ),
         ),
       ],
     );
   }
 
+  // ==========================================================
+  // MENU LABEL
+  // ==========================================================
+
   Widget _menuLabel(String text) {
-    return Text(text, style: GoogleFonts.spaceGrotesk(color: menuPink, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 2.2));
+    return Text(
+      text,
+      style: GoogleFonts.spaceGrotesk(
+        color: menuBlue,
+        fontSize: 9,
+        fontWeight: FontWeight.w800,
+        letterSpacing: 2.2,
+      ),
+    );
   }
 
-  Widget _menuItem({required String number, required String label, required VoidCallback? onTap}) {
+  // ==========================================================
+  // MENU ITEM
+  // ==========================================================
+
+  Widget _menuItem({
+    required String number,
+    required String label,
+    required VoidCallback? onTap,
+  }) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(14),
+      hoverColor: menuBlue.withValues(alpha: 0.07),
+      splashColor: menuBlue.withValues(alpha: 0.12),
+      highlightColor: menuBlue.withValues(alpha: 0.06),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 18),
+        padding: const EdgeInsets.symmetric(
+          vertical: 18,
+        ),
         child: Row(
           children: [
-            SizedBox(width: 35, child: Text(number, style: GoogleFonts.spaceGrotesk(color: menuMuted.withValues(alpha: 0.55), fontSize: 10, fontWeight: FontWeight.w600))),
-            Expanded(child: Text(label, style: GoogleFonts.unbounded(color: menuWhite, fontSize: 20, fontWeight: FontWeight.w600, letterSpacing: -0.5))),
-            const Icon(Icons.arrow_outward_rounded, color: menuLime, size: 18),
+            SizedBox(
+              width: 35,
+              child: Text(
+                number,
+                style: GoogleFonts.spaceGrotesk(
+                  color: menuMuted.withValues(alpha: 0.55),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+
+            Expanded(
+              child: Text(
+                label,
+                style: GoogleFonts.unbounded(
+                  color: menuWhite,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ),
+
+            Icon(
+              Icons.arrow_outward_rounded,
+              color: menuBlue,
+              size: 18,
+            ),
           ],
         ),
       ),

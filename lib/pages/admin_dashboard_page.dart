@@ -9,6 +9,7 @@ import 'admin_login_page.dart';
 import 'admin_profile_page.dart';
 import 'admin_projects_page.dart';
 import 'admin_skills_page.dart';
+import 'admin_training_page.dart';
 
 class AdminDashboardPage extends StatefulWidget {
   const AdminDashboardPage({
@@ -338,11 +339,20 @@ class _AdminDashboardPageState
 
             _menuItem(
               icon:
+                  Icons.school_outlined,
+              title:
+                  'Training & Courses',
+              index:
+                  4,
+            ),
+
+            _menuItem(
+              icon:
                   Icons.person_outline_rounded,
               title:
                   'Profile',
               index:
-                  4,
+                  5,
             ),
 
             const Spacer(),
@@ -509,11 +519,20 @@ class _AdminDashboardPageState
 
             _drawerMenuItem(
               icon:
+                  Icons.school_outlined,
+              title:
+                  'Training & Courses',
+              index:
+                  4,
+            ),
+
+            _drawerMenuItem(
+              icon:
                   Icons.person_outline_rounded,
               title:
                   'Profile',
               index:
-                  4,
+                  5,
             ),
 
             const Spacer(),
@@ -785,6 +804,9 @@ class _AdminDashboardPageState
         return const AdminCertificatesPage();
 
       case 4:
+        return const AdminTrainingPage();
+
+      case 5:
         return const AdminProfilePage();
 
       default:

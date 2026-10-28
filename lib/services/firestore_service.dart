@@ -16,6 +16,9 @@ class FirestoreService {
   CollectionReference<Map<String, dynamic>> get certificates =>
       _db.collection('certificates');
 
+  CollectionReference<Map<String, dynamic>> get training =>
+      _db.collection('training');
+
   CollectionReference<Map<String, dynamic>> get profile =>
       _db.collection('profile');
 
@@ -274,6 +277,70 @@ class FirestoreService {
           descending: true,
         )
         .snapshots();
+  }
+
+  // ============================================================
+  // TRAINING & COURSES CRUD
+  // ============================================================
+
+  Future<String> addTraining({
+    required String name,
+    required String issuer,
+    required String year,
+    String credential = '',
+    String trainingUrl = '',
+    String imageUrl = '',
+  }) async {
+    final document = await training.add({
+      'name': name,
+      'issuer': issuer,
+      'year': year,
+      'credential': credential,
+      'trainingUrl': trainingUrl,
+      'imageUrl': imageUrl,
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+
+    return document.id;
+  }
+
+  Future<void> updateTraining({
+    required String id,
+    required String name,
+    required String issuer,
+    required String year,
+    String credential = '',
+    String trainingUrl = '',
+    String imageUrl = '',
+  }) async {
+    await training.doc(id).update({
+      'name': name,
+      'issuer': issuer,
+      'year': year,
+      'credential': credential,
+      'trainingUrl': trainingUrl,
+      'imageUrl': imageUrl,
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  Future<void> deleteTraining(String id) async {
+    await training.doc(id).delete();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getTrainings() {
+    return training
+        .orderBy(
+          'createdAt',
+          descending: true,
+        )
+        .snapshots();
+  }
+
+  Future<int> getTrainingCount() async {
+    final result = await training.count().get();
+    return result.count ?? 0;
   }
 
   // ============================================================
